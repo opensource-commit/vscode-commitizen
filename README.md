@@ -1,6 +1,6 @@
 # vscode-commitizen README
 
-This is rough modification of [vscode-commitizen](https://github.com/KnisterPeter/vscode-commitizen) that make it support issue id.
+This is a rough modification of [vscode-commitizen](https://github.com/KnisterPeter/vscode-commitizen) that makes it support issue id.
 
 Just copy the [cz-config](./.cz-config.js) file into your project.
 
