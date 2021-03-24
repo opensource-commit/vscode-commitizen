@@ -277,7 +277,7 @@ async function commit(cwd: string, message: string): Promise<void> {
 
   try {
     await conditionallyStageFiles(cwd);
-    const result = await execa('git', ['commit', '-m', gitCmdArgs.message], {
+    const result = await execa('git', ['commit', '-am', gitCmdArgs.message], {
       cwd: gitCmdArgs.cwd,
       preferLocal: false,
       shell: getConfiguration().shell
