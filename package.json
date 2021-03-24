@@ -3,13 +3,11 @@
   "displayName": "Visual Studio Code Commitizen Support",
   "description": "commitizen - git commit with conventions",
   "version": "0.12.1",
-  "publisher": "KnisterPeter",
+  "publisher": "bn-kvh",
   "engines": {
     "vscode": "^1.46.0"
   },
-  "categories": [
-    "Other"
-  ],
+  "categories": ["Other"],
   "keywords": [
     "git",
     "commit",
@@ -17,9 +15,7 @@
     "changelog",
     "conventional-changelog"
   ],
-  "activationEvents": [
-    "onCommand:vscode-commitizen.commit"
-  ],
+  "activationEvents": ["onCommand:vscode-commitizen.commit"],
   "main": "./out/extension",
   "contributes": {
     "configuration": {
@@ -37,11 +33,7 @@
         },
         "commitizen.showOutputChannel": {
           "type": "string",
-          "enum": [
-            "off",
-            "always",
-            "onError"
-          ],
+          "enum": ["off", "always", "onError"],
           "default": "onError",
           "description": "Open the output panel after commit."
         },
@@ -121,9 +113,7 @@
   },
   "homepage": "https://github.com/KnisterPeter/vscode-commitizen",
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "extends": ["@commitlint/config-conventional"]
   },
   "husky": {
     "hooks": {
@@ -135,31 +125,20 @@
     "trailingComma": "none"
   },
   "renovate": {
-    "extends": [
-      "config:base"
-    ],
+    "extends": ["config:base"],
     "lockFileMaintenance": {
       "enabled": true,
       "automerge": true
     },
     "packageRules": [
       {
-        "depTypeList": [
-          "devDependencies"
-        ],
-        "updateTypes": [
-          "minor",
-          "patch"
-        ],
+        "depTypeList": ["devDependencies"],
+        "updateTypes": ["minor", "patch"],
         "automerge": true
       },
       {
-        "packagePatterns": [
-          "^@types/"
-        ],
-        "excludePackagePatterns": [
-          "@types/vscode"
-        ],
+        "packagePatterns": ["^@types/"],
+        "excludePackagePatterns": ["@types/vscode"],
         "automerge": true
       }
     ]

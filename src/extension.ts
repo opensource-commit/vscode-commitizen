@@ -36,6 +36,7 @@ export async function activate(
   context.subscriptions.push(
     vscode.commands.registerCommand('vscode-commitizen.commit', async () => {
       const ccm = new ConventionalCommitMessage(czConfig);
+      await ccm.getTicketNumber();
       await ccm.getType();
       await ccm.getScope();
       await ccm.getSubject();
@@ -51,6 +52,7 @@ export async function activate(
 }
 
 interface CzConfig {
+  ticketNumber: string;
   types: {
     value: string;
     name: string;
@@ -255,6 +257,7 @@ const DEFAULT_TYPES = [
 ];
 
 const DEFAULT_MESSAGES = {
+  ticketNumber: "Enter the ticket number",
   type: "Select the type of change that you're committing",
   customScope: 'Denote the SCOPE of this change',
   customScopeEntry: 'Custom scope...',
@@ -389,6 +392,7 @@ class ConventionalCommitMessage {
   private readonly czConfig: CzConfig | undefined;
   private next = true;
 
+  private ticketNumber?: string;
   private type?: string;
   private scope: string | undefined;
   private subject?: string;
@@ -398,6 +402,15 @@ class ConventionalCommitMessage {
 
   constructor(czConfig: CzConfig | undefined) {
     this.czConfig = czConfig;
+  }
+
+  public async getTicketNumber(): Promise<void> {
+    if (this.next) {
+      this.next = await ask(
+        this.inputMessage('ticketNumber'),
+        (input) => (this.ticketNumber = input),
+      );
+    }
   }
 
   public async getType(): Promise<void> {
