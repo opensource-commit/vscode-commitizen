@@ -72,6 +72,7 @@ interface CzConfig {
   allowCustomScopes: boolean;
   allowBreakingChanges: string[];
   footerPrefix: string;
+  ticketNumberPrefix: string | undefined;
   skipQuestions?: string[];
 }
 
@@ -392,8 +393,8 @@ class ConventionalCommitMessage {
   private readonly czConfig: CzConfig | undefined;
   private next = true;
 
-  private ticketNumber?: string;
-  private type?: string;
+  private ticketNumber: string | undefined;
+  private type: string | undefined;
   private scope: string | undefined;
   private subject?: string;
   private body: string | undefined;
@@ -519,7 +520,8 @@ class ConventionalCommitMessage {
   public get message(): string {
     return (
       // tslint:disable-next-line: prefer-template
-      this.type +
+      (typeof this.ticketNumber === 'string' ? `${this.czConfig?.ticketNumberPrefix}${this.ticketNumber} ` : '') +
+      (typeof this.type === 'string' ? `${this.type}` : '') +
       (typeof this.scope === 'string' && this.scope ? `(${this.scope})` : '') +
       `: ${this.subject}\n\n${this.body}\n\n` +
       (this.breaking ? `BREAKING CHANGE: ${this.breaking}\n` : '') +
